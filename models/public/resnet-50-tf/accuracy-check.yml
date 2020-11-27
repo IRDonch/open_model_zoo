@@ -1,19 +1,15 @@
 models:
   - name: resnet-50-tf
     launchers:
-      - framework: tf
-        model: public/resnet-50-tf/resnet_v1-50.pb
+      - framework: tf2
+        saved_model_dir: public/resnet-50-tf/resnet-50.savedmodel
         adapter: classification
-        inputs:
-          - name: map/TensorArrayStack/TensorArrayGatherV3
-            type: INPUT
 
     datasets:
-      - name: imagenet_1001_classes
+      - name: imagenet_1000_classes
         preprocessing:
-          - type: bgr_to_rgb
           - type: normalization
-            mean: [123.68, 116.78, 103.94]
+            mean: [103.94, 116.78, 123.68]
           - type: resize
             size: 256
             aspect_ratio_scale: greater
@@ -27,7 +23,7 @@ models:
         adapter: classification
 
     datasets:
-      - name: imagenet_1001_classes
+      - name: imagenet_1000_classes
         preprocessing:
           - type: resize
             size: 256

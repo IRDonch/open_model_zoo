@@ -18,17 +18,16 @@ description: >-
   repository <https://github.com/tensorflow/models/tree/v2.2.0/official/r1/resnet>.
 task_type: classification
 files:
-  - name: resnet_v1-50.pb
-    size: 102170160
-    sha256: 7c186a471a30682cdee02b246eeb0bfd93fc71d9fa53834d69f8101e664d12f8
-    source: https://download.01.org/opencv/public_models/012020/resnet-50-tf/resnet_v1-50.pb
+  - name: resnet50_weights_tf_dim_ordering_tf_kernels.h5
+    size: 102967424
+    sha256: 7011d39ea4f61f4ddb8da99c4addf3fae4209bfda7828adb4698b16283258fbe
+    source: https://storage.googleapis.com/tensorflow/keras-applications/resnet/resnet50_weights_tf_dim_ordering_tf_kernels.h5
 model_optimizer_args:
   - --input_shape=[1,224,224,3]
-  - --mean_values=[123.68,116.78,103.94]
-  - --input=map/TensorArrayStack/TensorArrayGatherV3
-  - --output=softmax_tensor
-  - --input_model=$dl_dir/resnet_v1-50.pb
-  - --reverse_input_channels
+  - --mean_values=[103.94,116.78,123.68]
+  - --input=input_1
+  - --output=StatefulPartitionedCall/resnet50/predictions/Softmax
+  - --saved_model_dir=$conv_dir/resnet-50.savedmodel
 framework: tf
 quantizable: yes
 license: https://raw.githubusercontent.com/tensorflow/models/master/LICENSE
